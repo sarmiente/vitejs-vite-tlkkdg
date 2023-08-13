@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 import { PDFJSWorker } from 'pdfjs-dist';
+import * as PDFJS from 'pdfjs-dist';
+
+const worker = new PDFJS.PDFJSWorker();
 
 const Word = () => {
   const [file, setFile] = useState();
