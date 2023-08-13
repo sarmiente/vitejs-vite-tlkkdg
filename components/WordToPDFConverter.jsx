@@ -15,9 +15,14 @@ function WordToPDFConverter() {
     reader.onload = (e) => {
       // Create a new Blob from the data URL
       const blob = new Blob([e.target.result], { type: file.type });
-      // Create a new PDF from the Blob
+      // Create a new canvas
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      // Draw the Blob to the canvas
+      ctx.drawImage(blob, 0, 0);
+      // Create a new PDF from the canvas
       const pdf = new jsPDF();
-      pdf.fromDataURL(blob);
+      pdf.fromDataURL(ctx.canvas.toDataURL());
       // Download the PDF
       pdf.save(`${file.name}.pdf`);
     };
