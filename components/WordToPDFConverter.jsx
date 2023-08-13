@@ -4,7 +4,10 @@ import jsPDF from 'jspdf';
 function WordToPDFConverter() {
   const [file, setFile] = useState(null);
 
-  const u = null;
+  constructor(props) {
+    super(props);
+    this.u = null;
+  }
 
   function handleChange(event) {
     setFile(event.target.files[0]);
@@ -15,13 +18,13 @@ function WordToPDFConverter() {
     // Read the file contents as an array of bytes
     const reader = new FileReader();
     reader.onload = (e) => {
-      // Initialize the u variable
-      u = e.target.result;
-      // Create a new File object from the array of bytes
-      const file = new File([u], file.name, { type: file.type });
-      // Create a new PDF from the File object
+      // Store the file contents in the u variable
+      this.u = e.target.result;
+      // Convert the File object to an array of bytes
+      const fileArray = file.arrayBuffer();
+      // Create a new PDF from the array of bytes
       const pdf = new jsPDF();
-      pdf.write(file);
+      pdf.write(fileArray);
       // Download the PDF
       pdf.save(`${file.name}.pdf`);
     };
