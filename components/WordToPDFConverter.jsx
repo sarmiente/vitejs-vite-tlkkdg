@@ -4,6 +4,8 @@ import jsPDF from 'jspdf';
 function WordToPDFConverter() {
   const [file, setFile] = useState(null);
 
+  const u = null;
+
   function handleChange(event) {
     setFile(event.target.files[0]);
   }
