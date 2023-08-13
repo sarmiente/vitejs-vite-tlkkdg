@@ -13,9 +13,11 @@ function WordToPDFConverter() {
     // Read the file contents as a data URL
     const reader = new FileReader();
     reader.onload = (e) => {
-      // Create a new PDF from the data URL
+      // Create a new Blob from the data URL
+      const blob = new Blob([e.target.result], { type: file.type });
+      // Create a new PDF from the Blob
       const pdf = new jsPDF();
-      pdf.fromDataURL(e.target.result);
+      pdf.fromDataURL(blob);
       // Download the PDF
       pdf.save(`${file.name}.pdf`);
     };
