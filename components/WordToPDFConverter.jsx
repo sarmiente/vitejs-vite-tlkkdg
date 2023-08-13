@@ -4,31 +4,22 @@ import jsPDF from 'jspdf';
 function WordToPDFConverter() {
   const [file, setFile] = useState(null);
 
-  constructor(props) {
-    super(props);
-    this.u = null;
-  }
-
   function handleChange(event) {
     setFile(event.target.files[0]);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    // Read the file contents as an array of bytes
+    // Read the file contents as a data URL
     const reader = new FileReader();
     reader.onload = (e) => {
-      // Store the file contents in the u variable
-      this.u = e.target.result;
-      // Convert the File object to an array of bytes
-      const fileArray = file.arrayBuffer();
-      // Create a new PDF from the array of bytes
+      // Create a new PDF from the data URL
       const pdf = new jsPDF();
-      pdf.write(fileArray);
+      pdf.fromDataURL(e.target.result);
       // Download the PDF
       pdf.save(`${file.name}.pdf`);
     };
-    reader.readAsArrayBuffer(file);
+    reader.readAsDataURL(file);
   }
 
   return (
