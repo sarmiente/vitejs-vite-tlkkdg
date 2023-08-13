@@ -1,12 +1,12 @@
 import Layout from '/Layout/Layout';
 import './App.css';
-import WordToPDFConverter from '../components/WordToPDFConverter';
+import Word from '../components/Word';
 
 function App() {
   return (
     <Layout>
       <p>Welcome to my website!</p>
-      <WordToPDFConverter />
+      <Word />
     </Layout>
   );
 }
