@@ -13,9 +13,11 @@ function WordToPDFConverter() {
     // Read the file contents as an array of bytes
     const reader = new FileReader();
     reader.onload = (e) => {
-      // Create a new PDF from the array of bytes
+      // Create a new File object from the array of bytes
+      const file = new File([e.target.result], file.name, { type: file.type });
+      // Create a new PDF from the File object
       const pdf = new jsPDF();
-      pdf.write(e.target.result);
+      pdf.write(file);
       // Download the PDF
       pdf.save(`${file.name}.pdf`);
     };
